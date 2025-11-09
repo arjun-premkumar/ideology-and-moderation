@@ -1,0 +1,5 @@
+.vscode
+data/mediabiasfactcheck_fulldataset.csv
+lib/__pycache__/
+logs
+src/__pycache__/
