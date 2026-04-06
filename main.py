@@ -5,7 +5,7 @@ from src.bsky_label_prof_collector.bsky_prof_extractor import extract_profiles
 from concurrent.futures import ThreadPoolExecutor
 
 def main():
-
+    #Concurrently run both listeners and extractors
     with ThreadPoolExecutor(max_workers=4) as executor:
         executor.submit(label_listen)
         executor.submit(run_post_async, post_listener)
