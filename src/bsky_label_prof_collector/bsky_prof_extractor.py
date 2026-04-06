@@ -18,14 +18,14 @@ from textblob import TextBlob
 from lib import constants
 
 DATA_COLUMNS = ['DID', 'pol_score', 'language','posts_num','links_num','follow_ratio','sentiment','activity_life_sec','burstiness_index']
-BATCH_SIZE = 100
-SLEEP_SECS = 660
+BATCH_SIZE = 10
+SLEEP_SECS = 90
 DetectorFactory.seed = 0
 
 logging.basicConfig(filename=constants.ERROR_LOG, level=logging.ERROR, format='%(asctime)s - %(message)s')
 
 client = Client()
-client.login('Bluesky Username', 'Bluesky Password')
+client.login('bluesky username', 'bluesky password')
 mbfc_df = pd.read_csv(constants.MBFC_CSV)
 
 def extract_news_link_pol_score(text: str) -> tuple[float | None, str | None]:
@@ -337,11 +337,15 @@ def extract_profiles() -> None:
     while True:
 
         #Sleep before each extraction cycle to allow for new DIDs to be added to the DID file
-        print("PROF_EXTRACT: Sleeping for", SLEEP_SECS, "seconds...")     
+        print("PROF_EXTRACT: Sleeping for", SLEEP_SECS/60 , "minutes...")     
         time.sleep(SLEEP_SECS)
 
         #Read the DIDs from the DID file
-        did_df = pd.read_csv(constants.DID_CSV, header=None, names=['DID','labelled'])
+        if os.path.exists(constants.DID_CSV):
+            did_df = pd.read_csv(constants.DID_CSV, header=None, names=['DID','labelled'])
+        else:
+            print("PROF_EXTRACT: No DID file found. Skipping this cycle.")
+            continue
         
         #Read the list of already extracted DIDs to avoid re-processing
         if os.path.exists(constants.EXTRACTED_DID_CSV):

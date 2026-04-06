@@ -6,7 +6,7 @@ from lib import constants
 from atproto import AtUri
 
 #Define the sleep time between each DID extraction cycle (in seconds)
-SLEEP_SECS = 600
+SLEEP_SECS = 180
 
 def extract_dids() -> None:
     """
