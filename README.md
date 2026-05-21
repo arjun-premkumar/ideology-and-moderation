@@ -1,4 +1,4 @@
-This is data collection pipeline for a research study to investigate the relationship between the production of incivility and political ideology on Bluesky. The pipeline has four main parts:
+This is the data collection pipeline for a research study to investigate the relationship between the production of incivility and political ideology on Bluesky. The pipeline has four main parts:
 
 1. Label Listener : Listens to the Bluesky Labels firehose and collects label data on 'rude' and various 'intolerant' labels
 2. Post Listener : Listens to the Bluesky Repos firehose and collects DIDs of users who have created a post
